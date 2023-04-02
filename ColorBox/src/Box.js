@@ -1,4 +1,5 @@
 import React from "react"
+import "./Box.css"
 
 const Box = ({color, width, height}) => {
     const styles = {
@@ -8,7 +9,7 @@ const Box = ({color, width, height}) => {
     }
     
     return (
-        <div style={styles}></div>
+            <div className="box" style={styles}></div>
     )
 }
 

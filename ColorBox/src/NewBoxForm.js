@@ -2,29 +2,38 @@ import React, { useState } from "react";
 
 const NewBoxForm = ({ addBox }) => {
     const initialState = {
-        boxHeight: "",
-        boxWidth: "",
-        boxColor: ""
+        boxHeight: 150,
+        boxWidth: 150,
+        boxColor: "Aquamarine"
     }
 
     const[formData, setFormData] = useState(initialState)
 
     const HandleChange = (e) => {
-        const { name, value } = e.target
+        let { name, value } = e.target
+        value = typeof value === "number" ? Number(value) : value
+        
         setFormData({
             ...formData,
             [name]: value
         })
-        console.log("foo")
+        console.log(`${name}: ${value}`)
+        console.log(typeof value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         const { boxWidth, boxHeight, boxColor } = formData
-        addBox( boxWidth, boxHeight, boxColor)
+        addBox( Number(boxWidth), Number(boxHeight), boxColor)
         setFormData(initialState)
         console.log("Submit!")
     }
+
+    const colorOptions = [
+        "Aquamarine", "BlueViolet", "CadetBlue", "Coral", "Crimson",
+        "DarkOrchid", "DarkOrange", "DarkSlateGray", "Green", "Indigo",
+        "Maroon", "MediumTurquoise"
+    ]
     
 
     return (
@@ -52,13 +61,15 @@ const NewBoxForm = ({ addBox }) => {
                 step={50}
             />
             <label htmlFor="boxColor">Color: </label>
-            <input
+            <select
                 id="boxColor"
                 name="boxColor"
                 type="color"
                 onChange={HandleChange}
                 value={formData.boxColor}
-            />
+            >
+                {colorOptions.map(color => <option value={color}>{color}</option>)}
+            </select>
             <button>Submit</button>
         </form>
     )

@@ -1,5 +1,13 @@
 #boxes {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-around;
+    height: auto;
+    margin-top: 10px;
+}
+
+.boxHolder {
+    display: flex;
+    flex: row wrap;
 }
