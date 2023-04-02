@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const NewBoxForm = ({ addBox }) => {
     const initialState = {
-        boxHeight: 150,
-        boxWidth: 150,
+        boxHeight: 100,
+        boxWidth: 100,
         boxColor: "Aquamarine"
     }
 

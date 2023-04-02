@@ -17,7 +17,12 @@ const BoxList = () => {
         setBoxes(boxes => [...boxes, {boxWidth, boxHeight, boxColor}])
     }
     
-    console.log(boxes)
+    const handleRemove = (e) => {
+        const button = e.target
+        const boxHolder = button.parentElement.parentElement
+        boxHolder.remove()
+        console.log(boxHolder)
+    }
 
     return (
         <div>
@@ -27,7 +32,7 @@ const BoxList = () => {
                     <div className="boxHolder">
                         <Box key={idx} color={boxColor} width={boxWidth} height={boxHeight}/>
                         <span>
-                            <button id="{idx}">X</button>
+                            <button onClick={handleRemove} id={idx}>X</button>
                         </span>
                     </div>
                 )}
