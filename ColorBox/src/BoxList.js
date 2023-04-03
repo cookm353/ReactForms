@@ -1,38 +1,35 @@
 import React, { useState } from "react"
 import Box from "./Box"
 import NewBoxForm from "./NewBoxForm"
+import  { v4 as uuidv4 } from "uuid"
 import "./BoxList.css"
 
 const BoxList = () => {
     const initialState = [
-        {id: 1, boxWidth: 100, boxHeight: 100, boxColor: "purple"},
-        {id: 2, boxWidth: 50, boxHeight: 50, boxColor: "green"}
+        {id: uuidv4(), width: 100, height: 100, color: "purple"},
+        {id: uuidv4(), width: 50, height: 50, color: "green"}
     ]
     
     const [boxes, setBoxes ] = useState(initialState)
-    const addBox = (boxWidth, boxHeight, boxColor) => {
-        console.log(`Height: ${boxHeight}`)
-        console.log(`Width: ${boxWidth}`)
-        console.log(`Color: ${boxColor}`)
-        setBoxes(boxes => [...boxes, {boxWidth, boxHeight, boxColor}])
+    const addBox = (newBox) => {
+        setBoxes(boxes => [...boxes, { ...newBox, id: uuidv4()}])
     }
-    
+
     const handleRemove = (e) => {
         const button = e.target
         const boxHolder = button.parentElement.parentElement
         boxHolder.remove()
-        console.log(boxHolder)
     }
 
     return (
         <div>
             <NewBoxForm addBox={addBox}/>
             <div id="boxes">
-                {boxes.map(({boxColor, boxWidth, boxHeight}, idx) => 
-                    <div className="boxHolder">
-                        <Box key={idx} color={boxColor} width={boxWidth} height={boxHeight}/>
+                {boxes.map(({id, color, width, height}) => 
+                    <div key={id} className="boxHolder">
+                        <Box id={id} color={color} width={width} height={height}/>
                         <span>
-                            <button onClick={handleRemove} id={idx}>X</button>
+                            <button onClick={handleRemove}>X</button>
                         </span>
                     </div>
                 )}

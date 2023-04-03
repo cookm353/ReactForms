@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import  { v4 as uuidv4 } from "uuid"
 
 const NewBoxForm = ({ addBox }) => {
     const initialState = {
-        boxHeight: 100,
-        boxWidth: 100,
-        boxColor: "Aquamarine"
+        height: 100,
+        width: 100,
+        color: "Aquamarine"
     }
 
     const[formData, setFormData] = useState(initialState)
@@ -17,16 +18,12 @@ const NewBoxForm = ({ addBox }) => {
             ...formData,
             [name]: value
         })
-        console.log(`${name}: ${value}`)
-        console.log(typeof value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const { boxWidth, boxHeight, boxColor } = formData
-        addBox( Number(boxWidth), Number(boxHeight), boxColor)
+        addBox( { ...formData })
         setFormData(initialState)
-        console.log("Submit!")
     }
 
     const colorOptions = [
@@ -44,10 +41,10 @@ const NewBoxForm = ({ addBox }) => {
                 name="boxHeight"
                 type="range"
                 onChange={HandleChange}
-                value={formData.boxHeight}
+                value={formData.height}
                 min={50}
-                max={250}
-                step={50}
+                max={150}
+                step={10}
             />
             <label htmlFor="boxWidth">Width: </label>
             <input
@@ -55,7 +52,7 @@ const NewBoxForm = ({ addBox }) => {
                 name="boxWidth"
                 type="range"
                 onChange={HandleChange}
-                value={formData.boxWidth}
+                value={formData.width}
                 min={50}
                 max={250}
                 step={50}
@@ -66,9 +63,11 @@ const NewBoxForm = ({ addBox }) => {
                 name="boxColor"
                 type="color"
                 onChange={HandleChange}
-                value={formData.boxColor}
+                value={formData.color}
             >
-                {colorOptions.map(color => <option value={color}>{color}</option>)}
+                {colorOptions.map(color => 
+                    <option key={uuidv4()} value={color}>{color}</option>
+                )}
             </select>
             <button>Submit</button>
         </form>
