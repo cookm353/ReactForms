@@ -14,11 +14,3 @@ it("matches snapshot", () => {
     const { asFragment } = render(<BoxList />)
     expect(asFragment()).toMatchSnapshot()
 })
-
-// General tests
-
-it("should add a new box", () => {
-    const {getByLabelText, queryByText} = render(<BoxList />)
-    const colorInput = getByLabelText
-    expect()
-})
