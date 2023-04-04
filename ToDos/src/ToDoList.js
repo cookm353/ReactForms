@@ -25,7 +25,7 @@ const ToDoList = () => {
     
     return (
         <div className="toDos">
-            {/* <NewToDoForm addTask={addTask} /> */}
+            <NewToDoForm addTask={addTask} />
                 {tasks.map(task => 
                     <div className="task" key={uuidv4()}>
                         <ToDo task={task} />
