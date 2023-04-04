@@ -1,0 +1,10 @@
+.task {
+    display: flex;
+    flex: row wrap;
+}
+
+.task span {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 5px;
+}
