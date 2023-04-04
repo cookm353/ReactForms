@@ -14,3 +14,9 @@ it("matches snapshot", () => {
     const { asFragment } = render(<App />)
     expect(asFragment()).toMatchSnapshot()
 })
+
+// General test
+
+it("adds and removes tasks", () => {
+    
+})
