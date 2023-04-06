@@ -6,15 +6,15 @@ import "./ToDoList.css"
 
 const ToDoList = () => {
     const initialState = [
-        "Make breakfast",
-        "Brush teeth",
-        "Take shower",
-        "Walk dog"
+        {task: "Make breakfast"},
+        {task: "Brush teeth"},
+        {task: "Take shower"},
+        {task: "Walk dog"}
     ]
     
     const [tasks, setTasks] = useState(initialState)
-    const addTask = newTask => {
-        setTasks(tasks => [...tasks, newTask])
+    const addTask = (newTask) => {
+        setTasks(tasks => [...tasks, {newTask}])
     }
 
     const handleRemove = (e) => {
@@ -26,7 +26,7 @@ const ToDoList = () => {
     return (
         <div className="toDos">
             <NewToDoForm addTask={addTask} />
-                {tasks.map(task => 
+                {tasks.map(({task}) => 
                     <div className="task" key={uuidv4()}>
                         <ToDo task={task} />
                         <span><button onClick={handleRemove}>X</button></span>
